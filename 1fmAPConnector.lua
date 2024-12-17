@@ -1528,39 +1528,41 @@ function receive_items()
         file = io.open(client_communication_path .. "AP_" .. tostring(i) .. ".item", "r")
         io.input(file)
         received_item_id = tonumber(io.read())
-        io.close(file)
-        if not initializing and read_world() ~= 0 then
-            local item = get_item_by_id(received_item_id) or { Name = "UNKNOWN ITEM", ID = -1}
-            table.insert(message_cache.items, item)
-        end
-        if received_item_id == 2640000 then
-            write_victory_item()
-        elseif received_item_id >= 2641000 and received_item_id < 2642000 then
-            if received_item_id % 2641000 == 217 then
-                write_slides()
-            else
-                write_item(received_item_id % 2641000)
+        if received_item_id ~= nil then
+            io.close(file)
+            if not initializing and read_world() ~= 0 then
+                local item = get_item_by_id(received_item_id) or { Name = "UNKNOWN ITEM", ID = -1}
+                table.insert(message_cache.items, item)
             end
-        elseif received_item_id >= 2642000 and received_item_id < 2642100 then
-            write_shared_ability(received_item_id % 2642000)
-        elseif received_item_id >= 2642100 and received_item_id < 2643000 then
-            write_puppy(received_item_id % 2642100)
-        elseif received_item_id >= 2643000 and received_item_id < 2644000 then
-            write_sora_ability(received_item_id % 2643000)
-        elseif received_item_id >= 2644000 and received_item_id < 2645000 then
-            add_to_soras_stats(received_item_id % 2644000)
-        elseif received_item_id >= 2645000 and received_item_id < 2646000 then
-            write_summon_item(received_item_id % 2645000)
-        elseif received_item_id >= 2646000 and received_item_id < 2647000 then
-            write_magic_item(received_item_id % 2646000)
-        elseif received_item_id >= 2647000 and received_item_id < 2648000 then
-            write_world_item(received_item_id % 2647000)
-        elseif received_item_id >= 2648000 and received_item_id < 2649000 then
-            write_trinity_item(received_item_id % 2648000)
-        elseif received_item_id >= 2649000 and received_item_id < 2650000 then
-            write_olympus_cups_item(received_item_id % 2649000)
+            if received_item_id == 2640000 then
+                write_victory_item()
+            elseif received_item_id >= 2641000 and received_item_id < 2642000 then
+                if received_item_id % 2641000 == 217 then
+                    write_slides()
+                else
+                    write_item(received_item_id % 2641000)
+                end
+            elseif received_item_id >= 2642000 and received_item_id < 2642100 then
+                write_shared_ability(received_item_id % 2642000)
+            elseif received_item_id >= 2642100 and received_item_id < 2643000 then
+                write_puppy(received_item_id % 2642100)
+            elseif received_item_id >= 2643000 and received_item_id < 2644000 then
+                write_sora_ability(received_item_id % 2643000)
+            elseif received_item_id >= 2644000 and received_item_id < 2645000 then
+                add_to_soras_stats(received_item_id % 2644000)
+            elseif received_item_id >= 2645000 and received_item_id < 2646000 then
+                write_summon_item(received_item_id % 2645000)
+            elseif received_item_id >= 2646000 and received_item_id < 2647000 then
+                write_magic_item(received_item_id % 2646000)
+            elseif received_item_id >= 2647000 and received_item_id < 2648000 then
+                write_world_item(received_item_id % 2647000)
+            elseif received_item_id >= 2648000 and received_item_id < 2649000 then
+                write_trinity_item(received_item_id % 2648000)
+            elseif received_item_id >= 2649000 and received_item_id < 2650000 then
+                write_olympus_cups_item(received_item_id % 2649000)
+            end
+            i = i + 1
         end
-        i = i + 1
     end
     initializing = false
     write_check_number(i - 1)
