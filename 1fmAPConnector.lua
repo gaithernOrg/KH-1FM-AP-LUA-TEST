@@ -1562,6 +1562,8 @@ function receive_items()
                 write_olympus_cups_item(received_item_id % 2649000)
             end
             i = i + 1
+        else
+            break
         end
     end
     initializing = false
